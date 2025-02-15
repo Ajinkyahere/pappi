@@ -3,192 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Romantic Story for You</title>
+  <title>Couple Interaction App</title>
   <style>
-    /* General Styles */
-    body {
+    /* Global Styles */
+    * {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle, #ffafbd, #ffc3a0);
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       height: 100vh;
       overflow: hidden;
     }
 
-    .scene {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transition: background 1s ease-in-out;
-    }
-
-    .character {
-      position: relative;
-      width: 120px;
-      height: 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .boy, .girl {
-      background: linear-gradient(to bottom, #87ceeb, #4682b4);
-      border-radius: 20px;
-    }
-
-    .girl {
-      background: linear-gradient(to bottom, #ffb6c1, #ff69b4);
-    }
-
-    .head {
-      position: absolute;
-      top: -30px;
-      width: 60px;
-      height: 60px;
-      background: #ffe4c4;
-      border-radius: 50%;
-    }
-
-    .name {
-      position: absolute;
-      top: -80px;
-      font-size: 14px;
-      color: #fff;
-    }
-
-    .boy .name::after {
-      content: "Ajinkya";
-    }
-
-    .girl .name::after {
-      content: "You";
-    }
-
-    .message {
-      position: absolute;
-      bottom: 20%;
-      text-align: center;
+    h1 {
+      font-size: 2.5rem;
       color: white;
-      font-size: 18px;
-      padding: 10px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Character Styling */
+    .character {
+      width: 200px;
+      height: 200px;
+      background: url('https://i.ibb.co/qNBP54Q/cartoon-girl.png') no-repeat center/cover;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+      animation: idle 1s infinite alternate;
+    }
+
+    @keyframes idle {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Button Container */
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* Button Styling */
+    .btn {
+      padding: 12px 25px;
+      font-size: 1rem;
+      background: linear-gradient(45deg, #ff6f61, #ff9a8d);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #ff3b2f, #ff7a8a);
+      transform: scale(1.1);
+    }
+
+    /* Dialogue Box */
+    .dialogue {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 1.3rem;
+      color: white;
+      text-align: center;
       background: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      animation: fadeInOut 3s infinite alternate;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s;
     }
 
-    @keyframes fadeInOut {
-      0%, 100% {
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
         opacity: 1;
       }
-      50% {
-        opacity: 0.5;
-      }
     }
 
-    /* Floating Effects */
-    .floating {
-      position: absolute;
-      animation: floatEffect 4s infinite;
-    }
-
-    @keyframes floatEffect {
-      0% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
-      100% {
-        transform: translateY(0);
-      }
-    }
-
-    /* Heart Effects */
-    .heart {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      background: pink;
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-      animation: rise 4s infinite ease-in-out;
-    }
-
-    @keyframes rise {
-      0% {
-        opacity: 0;
-        transform: scale(0.5) translateY(0);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1) translateY(-150px);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1.2) translateY(-300px);
-      }
-    }
-
-    .credits {
+    /* Footer */
+    footer {
       position: absolute;
       bottom: 10px;
-      width: 100%;
+      font-size: 0.9rem;
+      color: white;
       text-align: center;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.7);
     }
   </style>
 </head>
 <body>
-  <div id="scene" class="scene">
-    <!-- Scene content will dynamically change -->
-    <div id="couple" class="couple">
-      <div class="character boy">
-        <div class="head"></div>
-        <div class="name"></div>
-      </div>
-      <div class="character girl">
-        <div class="head"></div>
-        <div class="name"></div>
-      </div>
-    </div>
-    <div id="message" class="message">Tap to Start the Story!</div>
-    <div class="credits">Made with 💕 by Ajinkya Jadhav</div>
+  <h1>Couple Interaction App</h1>
+
+  <!-- Character -->
+  <div class="character" id="character"></div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="btn" onclick="performAction('kiss')">Kiss 💋</button>
+    <button class="btn" onclick="performAction('hug')">Hug 🤗</button>
+    <button class="btn" onclick="performAction('slap')">Slap 👋</button>
+    <button class="btn" onclick="performAction('sleep')">Sleep 😴</button>
+    <button class="btn" onclick="performAction('mood')">Change Mood 🥰</button>
   </div>
 
+  <!-- Dialogue Box -->
+  <div class="dialogue" id="dialogue-box">
+    "Hi there! What would you like to do?"
+  </div>
+
+  <!-- Footer -->
+  <footer>Made with ❤️ by Ajinkya Jadhav</footer>
+
   <script>
-    const scene = document.getElementById("scene");
-    const message = document.getElementById("message");
-    const couple = document.getElementById("couple");
+    const dialogueBox = document.getElementById('dialogue-box');
+    const character = document.getElementById('character');
 
-    let currentScene = 0;
+    // Action Functionality
+    function performAction(action) {
+      switch (action) {
+        case 'kiss':
+          dialogueBox.textContent = "Aww, that was so sweet! 😘";
+          character.style.background = "url('https://i.ibb.co/wyRbcp8/cartoon-girl-kiss.png') no-repeat center/cover";
+          break;
 
-    // Scenes Data
-    const scenes = [
-      { background: "#ffafbd", message: "They meet for the first time." },
-      { background: "#ffc3a0", message: "They share their first kiss 💋." },
-      { background: "#a18cd1", message: "They hug tightly under the moon 🌙." },
-      { background: "#fbc2eb", message: "They sit together, holding hands." }
-    ];
+        case 'hug':
+          dialogueBox.textContent = "That was a warm hug! 🤗";
+          character.style.background = "url('https://i.ibb.co/qNBP54Q/cartoon-girl.png') no-repeat center/cover";
+          break;
 
-    // Change Scenes on Tap
-    scene.addEventListener("click", () => {
-      currentScene++;
+        case 'slap':
+          dialogueBox.textContent = "Ouch! That hurt! 😢";
+          character.style.background = "url('https://i.ibb.co/9yfxvX6/cartoon-girl-slap.png') no-repeat center/cover";
+          break;
 
-      if (currentScene >= scenes.length) currentScene = 0; // Loop back
+        case 'sleep':
+          dialogueBox.textContent = "Goodnight! 😴";
+          character.style.background = "url('https://i.ibb.co/3sD8t4D/cartoon-girl-sleep.png') no-repeat center/cover";
+          break;
 
-      const { background, message: msg } = scenes[currentScene];
-      scene.style.background = background;
-      message.textContent = msg;
+        case 'mood':
+          dialogueBox.textContent = "I'm feeling so happy now! 🥰";
+          character.style.background = "url('https://i.ibb.co/qNBP54Q/cartoon-girl.png') no-repeat center/cover";
+          break;
 
-      if (currentScene === 1) {
-        couple.classList.add("kiss");
-      } else {
-        couple.classList.remove("kiss");
+        default:
+          dialogueBox.textContent = "Hi there! What would you like to do?";
       }
-    });
+
+      character.style.backgroundSize = 'cover'; // Reset size for all actions
+    }
   </script>
 </body>
 </html>
