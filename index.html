@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Romantic Animation</title>
+  <title>Romantic Animation with Kiss Sound</title>
   <style>
     /* General Styling */
     body {
@@ -239,5 +239,16 @@
     <div class="message">I miss you, babe! 💕</div>
     <div class="credits"></div>
   </div>
+
+  <!-- Audio for the Kiss Sound -->
+  <audio id="kissSound" src="https://freesound.org/data/previews/341/341695_5260876-lq.mp3"></audio>
+
+  <script>
+    // Play the kiss sound after 3 seconds when the kiss happens
+    setTimeout(() => {
+      const audio = document.getElementById('kissSound');
+      audio.play();
+    }, 3000);
+  </script>
 </body>
 </html>
