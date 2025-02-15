@@ -3,69 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Couple Kiss Animation</title>
+  <title>Magical Romantic Animation</title>
   <style>
+    /* General Styling */
     body {
       margin: 0;
-      background: #f0f8ff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background: linear-gradient(145deg, #6d5dfc, #ff8ae2);
       overflow: hidden;
+      font-family: 'Arial', sans-serif;
     }
     .scene {
       position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .couple {
+      position: relative;
       width: 300px;
       height: 300px;
+      animation: float 4s ease-in-out infinite;
     }
-    .character {
+    .girl, .boy {
       position: absolute;
-      bottom: 50px;
-      width: 100px;
-      height: 200px;
-      transition: all 1.5s ease-in-out;
+      width: 150px;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
     }
     .girl {
       left: 0;
-      background: url('https://via.placeholder.com/100x200/FFB6C1/000000?text=Girl') no-repeat center/contain;
+      background-image: url('https://via.placeholder.com/150x300/FFB6C1/000?text=Girl');
     }
     .boy {
       right: 0;
-      background: url('https://via.placeholder.com/100x200/87CEEB/000000?text=Boy') no-repeat center/contain;
+      background-image: url('https://via.placeholder.com/150x300/87CEEB/000?text=Boy');
     }
+
+    /* Animation Effects */
+    .hearts {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+      animation: floatHeart 3s infinite ease-in-out;
+    }
+    .heart:nth-child(2) {
+      animation-delay: 0.5s;
+      background: #ff69b4;
+      transform: scale(1.2);
+    }
+    .heart:nth-child(3) {
+      animation-delay: 1s;
+      background: #f78fdf;
+      transform: scale(0.8);
+    }
+
+    /* Text Message */
     .message {
       position: absolute;
-      bottom: 10px;
-      width: 100%;
+      top: 70%;
+      font-size: 28px;
+      color: white;
+      text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.8);
+      animation: fadeIn 3s infinite alternate;
+    }
+
+    /* Credits */
+    .credits {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
       text-align: center;
-      font-family: Arial, sans-serif;
-      font-size: 20px;
-      color: #ff69b4;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
+      width: 100%;
     }
-    .scene.active .girl {
-      transform: translateX(80px);
+
+    /* Keyframes */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
     }
-    .scene.active .boy {
-      transform: translateX(-80px);
+    @keyframes floatHeart {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-100px) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-200px) scale(1.2);
+      }
     }
-    .scene.active .message {
-      opacity: 1;
+    @keyframes fadeIn {
+      0% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="scene" onclick="startAnimation()">
-    <div class="character girl"></div>
-    <div class="character boy"></div>
-    <div class="message">I miss you, babe!</div>
+  <div class="scene">
+    <div class="couple">
+      <div class="girl"></div>
+      <div class="boy"></div>
+    </div>
+    <div class="hearts">
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+    </div>
+    <div class="message">I miss you, babe! 💕</div>
+    <div class="credits">Made with 💕 by Ajinkya Jadhav</div>
   </div>
 
   <script>
-    function startAnimation() {
-      document.querySelector('.scene').classList.add('active');
+    // JavaScript for Additional Effects
+    const hearts = document.querySelector('.hearts');
+
+    // Generate more hearts dynamically
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDelay = `${Math.random() * 5}s`;
+      heart.style.transform = `scale(${Math.random() * 1.5})`;
+      hearts.appendChild(heart);
     }
   </script>
 </body>
