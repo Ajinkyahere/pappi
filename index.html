@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Couple Kiss Animation</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .scene {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+    .character {
+      position: absolute;
+      bottom: 50px;
+      width: 100px;
+      height: 200px;
+      transition: all 1.5s ease-in-out;
+    }
+    .girl {
+      left: 0;
+      background: url('https://via.placeholder.com/100x200/FFB6C1/000000?text=Girl') no-repeat center/contain;
+    }
+    .boy {
+      right: 0;
+      background: url('https://via.placeholder.com/100x200/87CEEB/000000?text=Boy') no-repeat center/contain;
+    }
+    .message {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      color: #ff69b4;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .scene.active .girl {
+      transform: translateX(80px);
+    }
+    .scene.active .boy {
+      transform: translateX(-80px);
+    }
+    .scene.active .message {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" onclick="startAnimation()">
+    <div class="character girl"></div>
+    <div class="character boy"></div>
+    <div class="message">I miss you, babe!</div>
+  </div>
+
+  <script>
+    function startAnimation() {
+      document.querySelector('.scene').classList.add('active');
+    }
+  </script>
+</body>
+</html>
