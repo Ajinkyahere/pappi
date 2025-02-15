@@ -3,143 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Romantic Animation</title>
+  <title>Romantic Story for You</title>
   <style>
-    /* General Styling */
+    /* General Styles */
     body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle, #ff9a9e, #fad0c4, #fbc2eb);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: radial-gradient(circle, #ffafbd, #ffc3a0);
+      font-family: 'Arial', sans-serif;
       height: 100vh;
       overflow: hidden;
-      font-family: 'Arial', sans-serif;
     }
 
     .scene {
-      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 100%;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Couple Styling */
-    .couple {
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      transition: background 1s ease-in-out;
     }
 
     .character {
       position: relative;
-      width: 100px;
+      width: 120px;
       height: 200px;
-      background: linear-gradient(to bottom, #ffb6c1, #ff6f91);
-      border-radius: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: all 2s ease-in-out;
     }
 
-    .boy {
-      background: linear-gradient(to bottom, #87ceeb, #1e90ff);
-      transform: translateX(-200px);
-      animation: moveBoy 3s ease-in-out forwards, hugBoy 8s forwards 5s, bedBoy 13s forwards 10s;
+    .boy, .girl {
+      background: linear-gradient(to bottom, #87ceeb, #4682b4);
+      border-radius: 20px;
     }
 
     .girl {
-      background: linear-gradient(to bottom, #ffb6c1, #ff6f91);
-      transform: translateX(200px);
-      animation: moveGirl 3s ease-in-out forwards, hugGirl 8s forwards 5s, bedGirl 13s forwards 10s;
+      background: linear-gradient(to bottom, #ffb6c1, #ff69b4);
     }
 
-    @keyframes moveBoy {
-      0% {
-        transform: translateX(-200px);
-      }
-      100% {
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes moveGirl {
-      0% {
-        transform: translateX(200px);
-      }
-      100% {
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes hugBoy {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-20px);
-      }
-    }
-
-    @keyframes hugGirl {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(20px);
-      }
-    }
-
-    @keyframes bedBoy {
-      0% {
-        transform: translateX(-20px);
-      }
-      100% {
-        transform: translate(-150px, 150px) rotate(90deg);
-      }
-    }
-
-    @keyframes bedGirl {
-      0% {
-        transform: translateX(20px);
-      }
-      100% {
-        transform: translate(150px, 150px) rotate(-90deg);
-      }
-    }
-
-    /* Heads */
     .head {
       position: absolute;
-      top: -40px;
+      top: -30px;
       width: 60px;
       height: 60px;
-      background: #ffddcc;
+      background: #ffe4c4;
       border-radius: 50%;
     }
 
-    /* Names */
     .name {
       position: absolute;
-      top: -70px;
-      font-size: 16px;
-      color: white;
-      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .boy .name {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .girl .name {
-      right: 50%;
-      transform: translateX(50%);
+      top: -80px;
+      font-size: 14px;
+      color: #fff;
     }
 
     .boy .name::after {
@@ -150,91 +67,84 @@
       content: "You";
     }
 
-    /* Kiss Effect */
-    .kiss {
+    .message {
       position: absolute;
-      font-size: 50px;
-      color: #ff69b4;
-      opacity: 0;
-      animation: kissEffect 2s ease-in-out forwards 3s;
+      bottom: 20%;
+      text-align: center;
+      color: white;
+      font-size: 18px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      animation: fadeInOut 3s infinite alternate;
     }
 
-    @keyframes kissEffect {
+    @keyframes fadeInOut {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    /* Floating Effects */
+    .floating {
+      position: absolute;
+      animation: floatEffect 4s infinite;
+    }
+
+    @keyframes floatEffect {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* Heart Effects */
+    .heart {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: pink;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: rise 4s infinite ease-in-out;
+    }
+
+    @keyframes rise {
       0% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.5) translateY(0);
       }
       50% {
         opacity: 1;
-        transform: scale(1.5);
+        transform: scale(1) translateY(-150px);
       }
       100% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(1.2) translateY(-300px);
       }
     }
 
-    /* Bed Styling */
-    .bed {
-      position: absolute;
-      bottom: 50px;
-      width: 300px;
-      height: 50px;
-      background: #8b4513;
-      border-radius: 20px;
-      display: none;
-    }
-
-    .bed.show {
-      display: block;
-      animation: bedShow 3s forwards 10s;
-    }
-
-    @keyframes bedShow {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    /* Message */
-    .message {
-      position: absolute;
-      bottom: 15%;
-      font-size: 20px;
-      color: white;
-      text-align: center;
-      animation: fadeIn 3s infinite alternate;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0.5;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    /* Credits */
     .credits {
       position: absolute;
-      bottom: 5%;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
+      bottom: 10px;
+      width: 100%;
       text-align: center;
-    }
-
-    .credits::after {
-      content: "Made with 💕 by Ajinkya Jadhav";
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
     }
   </style>
 </head>
 <body>
-  <div class="scene">
-    <div class="couple">
+  <div id="scene" class="scene">
+    <!-- Scene content will dynamically change -->
+    <div id="couple" class="couple">
       <div class="character boy">
         <div class="head"></div>
         <div class="name"></div>
@@ -243,27 +153,42 @@
         <div class="head"></div>
         <div class="name"></div>
       </div>
-      <div class="kiss">💋</div>
     </div>
-    <div class="message">Spending Quality Time Together 💕</div>
-    <div class="bed"></div>
-    <div class="credits"></div>
+    <div id="message" class="message">Tap to Start the Story!</div>
+    <div class="credits">Made with 💕 by Ajinkya Jadhav</div>
   </div>
 
-  <!-- Audio for the Kiss Sound -->
-  <audio id="kissSound" src="https://freesound.org/data/previews/341/341695_5260876-lq.mp3"></audio>
-
   <script>
-    // Play the kiss sound after 3 seconds when the kiss happens
-    setTimeout(() => {
-      const audio = document.getElementById('kissSound');
-      audio.play();
-    }, 3000);
+    const scene = document.getElementById("scene");
+    const message = document.getElementById("message");
+    const couple = document.getElementById("couple");
 
-    // Show the bed after 10 seconds
-    setTimeout(() => {
-      document.querySelector('.bed').classList.add('show');
-    }, 10000);
+    let currentScene = 0;
+
+    // Scenes Data
+    const scenes = [
+      { background: "#ffafbd", message: "They meet for the first time." },
+      { background: "#ffc3a0", message: "They share their first kiss 💋." },
+      { background: "#a18cd1", message: "They hug tightly under the moon 🌙." },
+      { background: "#fbc2eb", message: "They sit together, holding hands." }
+    ];
+
+    // Change Scenes on Tap
+    scene.addEventListener("click", () => {
+      currentScene++;
+
+      if (currentScene >= scenes.length) currentScene = 0; // Loop back
+
+      const { background, message: msg } = scenes[currentScene];
+      scene.style.background = background;
+      message.textContent = msg;
+
+      if (currentScene === 1) {
+        couple.classList.add("kiss");
+      } else {
+        couple.classList.remove("kiss");
+      }
+    });
   </script>
 </body>
 </html>
