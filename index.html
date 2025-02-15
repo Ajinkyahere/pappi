@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Couple Interaction App</title>
+  <title>Ajinkya & Rakhi</title>
   <style>
     /* Global Styles */
     * {
@@ -14,7 +14,7 @@
 
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+      background: linear-gradient(to bottom, #ffecd2, #fcb69f);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -26,148 +26,231 @@
     h1 {
       font-size: 2.5rem;
       color: white;
-      margin-bottom: 10px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Character Styling */
-    .character {
-      width: 200px;
-      height: 200px;
-      background: url('https://i.ibb.co/qNBP54Q/cartoon-girl.png') no-repeat center/cover;
-      border-radius: 50%;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       margin-bottom: 20px;
-      animation: idle 1s infinite alternate;
     }
 
-    @keyframes idle {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-10px);
-      }
-    }
-
-    /* Button Container */
-    .actions {
+    /* Couple Characters */
+    .couple {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      align-items: flex-end;
+      gap: 30px;
+      position: relative;
+    }
+
+    /* Male Character - Ajinkya */
+    .male, .female {
+      position: relative;
+      width: 120px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .male .head, .female .head {
+      width: 80px;
+      height: 80px;
+      background: #ffe0bd;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .male .head::before, .female .head::before, 
+    .male .head::after, .female .head::after {
+      content: '';
+      position: absolute;
+      top: 25px;
+      width: 10px;
+      height: 10px;
+      background: #000;
+      border-radius: 50%;
+    }
+
+    .male .head::before {
+      left: 20px;
+    }
+
+    .male .head::after {
+      right: 20px;
+    }
+
+    .female .head::before {
+      left: 20px;
+    }
+
+    .female .head::after {
+      right: 20px;
+    }
+
+    .male .body, .female .body {
+      width: 80px;
+      height: 100px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .male .body {
+      background: #0066cc;
+    }
+
+    .female .body {
+      background: #ff69b4;
+    }
+
+    .male .hand, .female .hand {
+      width: 20px;
+      height: 50px;
+      background: #ffe0bd;
+      border-radius: 10px;
+      position: absolute;
+      top: 30px;
+    }
+
+    .male .hand.left {
+      left: -20px;
+    }
+
+    .male .hand.right {
+      right: -20px;
+    }
+
+    .female .hand.left {
+      left: -20px;
+    }
+
+    .female .hand.right {
+      right: -20px;
+    }
+
+    .female .rakhi {
+      position: absolute;
+      top: 45px;
+      left: 10px;
+      width: 15px;
+      height: 15px;
+      background: #ffd700;
+      border-radius: 50%;
+      border: 2px solid red;
+    }
+
+    /* Interaction Effects */
+    .kiss .male .head {
+      transform: translateX(30px);
+      transition: transform 1s;
+    }
+
+    .kiss .female .head {
+      transform: translateX(-30px);
+      transition: transform 1s;
+    }
+
+    .hug .male .hand.right {
+      transform: rotate(-120deg);
+      transform-origin: top right;
+      transition: transform 1s;
+    }
+
+    .hug .female .hand.left {
+      transform: rotate(120deg);
+      transform-origin: top left;
+      transition: transform 1s;
+    }
+
+    .slap .female .hand.right {
+      animation: slap 1s ease-in-out;
+    }
+
+    @keyframes slap {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(50px);
+      }
+    }
+
+    .hold-hands .male .hand.right {
+      transform: translateX(20px);
+      transition: transform 1s;
+    }
+
+    .hold-hands .female .hand.left {
+      transform: translateX(-20px);
+      transition: transform 1s;
+    }
+
+    /* Buttons */
+    .actions {
+      margin-top: 20px;
+      display: flex;
       gap: 10px;
     }
 
-    /* Button Styling */
     .btn {
-      padding: 12px 25px;
-      font-size: 1rem;
-      background: linear-gradient(45deg, #ff6f61, #ff9a8d);
+      padding: 10px 20px;
+      background: #ff6f61;
       color: white;
       border: none;
-      border-radius: 15px;
+      border-radius: 10px;
       cursor: pointer;
+      font-size: 1rem;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
       transition: transform 0.2s, background 0.3s;
     }
 
     .btn:hover {
-      background: linear-gradient(45deg, #ff3b2f, #ff7a8a);
+      background: #ff3b2f;
       transform: scale(1.1);
     }
 
-    /* Dialogue Box */
-    .dialogue {
-      margin-top: 20px;
-      padding: 15px 30px;
-      font-size: 1.3rem;
-      color: white;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 15px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 1s;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* Footer */
     footer {
       position: absolute;
       bottom: 10px;
-      font-size: 0.9rem;
       color: white;
-      text-align: center;
+      text-shadow: 1px 1px 2px black;
     }
   </style>
 </head>
 <body>
-  <h1>Couple Interaction App</h1>
+  <h1>Ajinkya & Rakhi</h1>
 
-  <!-- Character -->
-  <div class="character" id="character"></div>
+  <!-- Couple -->
+  <div class="couple" id="couple">
+    <div class="male">
+      <div class="head"></div>
+      <div class="body"></div>
+      <div class="hand left"></div>
+      <div class="hand right"></div>
+    </div>
+    <div class="female">
+      <div class="head">
+        <div class="rakhi"></div>
+      </div>
+      <div class="body"></div>
+      <div class="hand left"></div>
+      <div class="hand right"></div>
+    </div>
+  </div>
 
-  <!-- Actions -->
+  <!-- Buttons -->
   <div class="actions">
-    <button class="btn" onclick="performAction('kiss')">Kiss 💋</button>
-    <button class="btn" onclick="performAction('hug')">Hug 🤗</button>
-    <button class="btn" onclick="performAction('slap')">Slap 👋</button>
-    <button class="btn" onclick="performAction('sleep')">Sleep 😴</button>
-    <button class="btn" onclick="performAction('mood')">Change Mood 🥰</button>
+    <button class="btn" onclick="interact('kiss')">Kiss 💋</button>
+    <button class="btn" onclick="interact('hug')">Hug 🤗</button>
+    <button class="btn" onclick="interact('slap')">Slap 👋</button>
+    <button class="btn" onclick="interact('hold-hands')">Hold Hands 🤝</button>
   </div>
 
-  <!-- Dialogue Box -->
-  <div class="dialogue" id="dialogue-box">
-    "Hi there! What would you like to do?"
-  </div>
-
-  <!-- Footer -->
   <footer>Made with ❤️ by Ajinkya Jadhav</footer>
 
   <script>
-    const dialogueBox = document.getElementById('dialogue-box');
-    const character = document.getElementById('character');
+    const couple = document.getElementById("couple");
 
-    // Action Functionality
-    function performAction(action) {
-      switch (action) {
-        case 'kiss':
-          dialogueBox.textContent = "Aww, that was so sweet! 😘";
-          character.style.background = "url('https://i.ibb.co/wyRbcp8/cartoon-girl-kiss.png') no-repeat center/cover";
-          break;
-
-        case 'hug':
-          dialogueBox.textContent = "That was a warm hug! 🤗";
-          character.style.background = "url('https://i.ibb.co/qNBP54Q/cartoon-girl.png') no-repeat center/cover";
-          break;
-
-        case 'slap':
-          dialogueBox.textContent = "Ouch! That hurt! 😢";
-          character.style.background = "url('https://i.ibb.co/9yfxvX6/cartoon-girl-slap.png') no-repeat center/cover";
-          break;
-
-        case 'sleep':
-          dialogueBox.textContent = "Goodnight! 😴";
-          character.style.background = "url('https://i.ibb.co/3sD8t4D/cartoon-girl-sleep.png') no-repeat center/cover";
-          break;
-
-        case 'mood':
-          dialogueBox.textContent = "I'm feeling so happy now! 🥰";
-          character.style.background = "url('https://i.ibb.co/qNBP54Q/cartoon-girl.png') no-repeat center/cover";
-          break;
-
-        default:
-          dialogueBox.textContent = "Hi there! What would you like to do?";
-      }
-
-      character.style.backgroundSize = 'cover'; // Reset size for all actions
+    function interact(action) {
+      couple.className = `couple ${action}`;
+      setTimeout(() => {
+        couple.className = "couple"; // Reset the animation after 1 second
+      }, 1000);
     }
   </script>
 </body>
