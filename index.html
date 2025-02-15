@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Romantic Animation with Kiss Sound</title>
+  <title>Romantic Animation</title>
   <style>
     /* General Styling */
     body {
@@ -30,10 +30,8 @@
     /* Couple Styling */
     .couple {
       position: relative;
-      width: 100%;
-      height: 300px;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
     }
 
@@ -46,19 +44,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: transform 2s ease-in-out;
+      transition: all 2s ease-in-out;
     }
 
     .boy {
       background: linear-gradient(to bottom, #87ceeb, #1e90ff);
       transform: translateX(-200px);
-      animation: moveBoy 3s ease-in-out forwards;
+      animation: moveBoy 3s ease-in-out forwards, hugBoy 8s forwards 5s, bedBoy 13s forwards 10s;
     }
 
     .girl {
       background: linear-gradient(to bottom, #ffb6c1, #ff6f91);
       transform: translateX(200px);
-      animation: moveGirl 3s ease-in-out forwards;
+      animation: moveGirl 3s ease-in-out forwards, hugGirl 8s forwards 5s, bedGirl 13s forwards 10s;
     }
 
     @keyframes moveBoy {
@@ -76,6 +74,42 @@
       }
       100% {
         transform: translateX(0);
+      }
+    }
+
+    @keyframes hugBoy {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-20px);
+      }
+    }
+
+    @keyframes hugGirl {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(20px);
+      }
+    }
+
+    @keyframes bedBoy {
+      0% {
+        transform: translateX(-20px);
+      }
+      100% {
+        transform: translate(-150px, 150px) rotate(90deg);
+      }
+    }
+
+    @keyframes bedGirl {
+      0% {
+        transform: translateX(20px);
+      }
+      100% {
+        transform: translate(150px, 150px) rotate(-90deg);
       }
     }
 
@@ -140,48 +174,28 @@
       }
     }
 
-    /* Floating Hearts */
-    .hearts {
+    /* Bed Styling */
+    .bed {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
+      bottom: 50px;
+      width: 300px;
+      height: 50px;
+      background: #8b4513;
+      border-radius: 20px;
+      display: none;
     }
 
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: pink;
-      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
-      animation: floatHeart 4s infinite ease-in-out;
+    .bed.show {
+      display: block;
+      animation: bedShow 3s forwards 10s;
     }
 
-    .heart:nth-child(2) {
-      animation-delay: 0.5s;
-      background: #ff69b4;
-      transform: scale(1.2);
-    }
-
-    .heart:nth-child(3) {
-      animation-delay: 1s;
-      background: #f78fdf;
-      transform: scale(0.8);
-    }
-
-    @keyframes floatHeart {
+    @keyframes bedShow {
       0% {
         opacity: 0;
-        transform: translateY(0) scale(0.5);
-      }
-      50% {
-        opacity: 1;
-        transform: translateY(-150px) scale(1);
       }
       100% {
-        opacity: 0;
-        transform: translateY(-300px) scale(1.2);
+        opacity: 1;
       }
     }
 
@@ -231,12 +245,8 @@
       </div>
       <div class="kiss">💋</div>
     </div>
-    <div class="hearts">
-      <div class="heart"></div>
-      <div class="heart"></div>
-      <div class="heart"></div>
-    </div>
-    <div class="message">I miss you, babe! 💕</div>
+    <div class="message">Spending Quality Time Together 💕</div>
+    <div class="bed"></div>
     <div class="credits"></div>
   </div>
 
@@ -249,6 +259,11 @@
       const audio = document.getElementById('kissSound');
       audio.play();
     }, 3000);
+
+    // Show the bed after 10 seconds
+    setTimeout(() => {
+      document.querySelector('.bed').classList.add('show');
+    }, 10000);
   </script>
 </body>
 </html>
