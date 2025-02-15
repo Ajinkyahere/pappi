@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Romantic Animated Couple</title>
+  <title>Romantic Animation</title>
   <style>
     /* General Styling */
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(145deg, #6d5dfc, #ff8ae2);
-      overflow: hidden;
-      font-family: 'Arial', sans-serif;
+      background: radial-gradient(circle, #ff9a9e, #fad0c4, #fbc2eb);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
     }
 
     .scene {
@@ -25,89 +25,118 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
     }
 
-    /* Couple Design */
+    /* Couple Styling */
     .couple {
       position: relative;
-      width: 200px;
+      width: 100%;
       height: 300px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
     }
 
-    .girl, .boy {
-      position: absolute;
-      bottom: 0;
-      width: 90px;
-      height: 220px;
+    .character {
+      position: relative;
+      width: 100px;
+      height: 200px;
+      background: linear-gradient(to bottom, #ffb6c1, #ff6f91);
       border-radius: 50px;
-      background: #ffb6c1;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      transform: scale(1);
-      transition: transform 0.5s;
-    }
-
-    .girl {
-      left: 0;
-      background: linear-gradient(to bottom, #ffb6c1, #ff6f91);
+      align-items: center;
+      transition: transform 2s ease-in-out;
     }
 
     .boy {
-      right: 0;
       background: linear-gradient(to bottom, #87ceeb, #1e90ff);
+      transform: translateX(-200px);
+      animation: moveBoy 3s ease-in-out forwards;
+    }
+
+    .girl {
+      background: linear-gradient(to bottom, #ffb6c1, #ff6f91);
+      transform: translateX(200px);
+      animation: moveGirl 3s ease-in-out forwards;
+    }
+
+    @keyframes moveBoy {
+      0% {
+        transform: translateX(-200px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes moveGirl {
+      0% {
+        transform: translateX(200px);
+      }
+      100% {
+        transform: translateX(0);
+      }
     }
 
     /* Heads */
     .head {
-      position: relative;
+      position: absolute;
+      top: -40px;
       width: 60px;
       height: 60px;
       background: #ffddcc;
       border-radius: 50%;
-      top: -20px;
     }
 
-    .girl .head {
+    /* Names */
+    .name {
+      position: absolute;
+      top: -70px;
+      font-size: 16px;
+      color: white;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .boy .name {
       left: 50%;
       transform: translateX(-50%);
     }
 
-    .boy .head {
+    .girl .name {
       right: 50%;
       transform: translateX(50%);
     }
 
-    /* Kissing Animation */
-    .couple:hover .girl {
-      transform: translateX(40px) scale(1.1);
+    .boy .name::after {
+      content: "Ajinkya";
     }
 
-    .couple:hover .boy {
-      transform: translateX(-40px) scale(1.1);
+    .girl .name::after {
+      content: "You";
     }
 
-    /* Magical Heart */
+    /* Kiss Effect */
     .kiss {
       position: absolute;
-      top: 120px;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 30px;
+      font-size: 50px;
       color: #ff69b4;
       opacity: 0;
-      animation: kissEffect 2s infinite ease-in-out;
+      animation: kissEffect 2s ease-in-out forwards 3s;
     }
 
     @keyframes kissEffect {
-      0%, 100% {
+      0% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5);
+        transform: scale(0.5);
       }
       50% {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1.5);
+        transform: scale(1.5);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5);
       }
     }
 
@@ -159,7 +188,7 @@
     /* Message */
     .message {
       position: absolute;
-      bottom: 20%;
+      bottom: 15%;
       font-size: 20px;
       color: white;
       text-align: center;
@@ -184,41 +213,21 @@
       text-align: center;
     }
 
-    /* Sparkles */
-    .sparkle {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: 0 0 10px white;
-      animation: sparkleAnimation 3s infinite ease-in-out;
-    }
-
-    @keyframes sparkleAnimation {
-      0% {
-        opacity: 0;
-        transform: scale(0.5) translateY(0);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1) translateY(-100px);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0.5) translateY(-200px);
-      }
+    .credits::after {
+      content: "Made with 💕 by Ajinkya Jadhav";
     }
   </style>
 </head>
 <body>
   <div class="scene">
     <div class="couple">
-      <div class="girl">
+      <div class="character boy">
         <div class="head"></div>
+        <div class="name"></div>
       </div>
-      <div class="boy">
+      <div class="character girl">
         <div class="head"></div>
+        <div class="name"></div>
       </div>
       <div class="kiss">💋</div>
     </div>
@@ -228,7 +237,7 @@
       <div class="heart"></div>
     </div>
     <div class="message">I miss you, babe! 💕</div>
-    <div class="credits">Made with 💕 by Ajinkya Jadhav</div>
+    <div class="credits"></div>
   </div>
 </body>
 </html>
